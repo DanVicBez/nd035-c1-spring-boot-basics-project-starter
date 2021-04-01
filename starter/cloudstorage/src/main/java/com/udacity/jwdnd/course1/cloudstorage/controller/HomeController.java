@@ -26,10 +26,11 @@ public class HomeController {
 	}
 	
 	@PostMapping
-	public String uploadNote(Authentication auth, Note note) {
+	public String submitNote(Authentication auth, Note note) {
 		User user = (User) auth.getPrincipal();
 		note.setUserId(user.getId());
 		noteService.addNote(note);
+
 		return "redirect:home";
 	}
 }
