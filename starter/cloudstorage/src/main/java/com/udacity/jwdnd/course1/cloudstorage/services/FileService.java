@@ -23,6 +23,10 @@ public class FileService {
 		file.setSize(Long.toString(multipartFile.getSize()));
 		file.setUserId(userId);
 
+		if (getFileByName(file.getName()) != null) {
+			return 0;
+		}
+		
 		try {
 			file.setData(multipartFile.getBytes());
 		} catch (IOException e) {
@@ -39,6 +43,10 @@ public class FileService {
 
 	public File getFileById(int id) {
 		return fileMapper.getFileById(id);
+	}
+	
+	public File getFileByName(String name) {
+		return fileMapper.getFileByName(name);
 	}
 
 	public int deleteFileById(int id) {

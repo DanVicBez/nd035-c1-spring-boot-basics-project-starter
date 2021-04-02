@@ -10,12 +10,14 @@
 	</head>
 	<body class="p-3 mb-2 bg-light text-black">
 		<div class="container">
-			<div id="logoutDiv">
+			<div class="pb-5" id="logoutDiv">
 				<form action="/logout" method="POST">
 					<button type="submit" class="btn btn-secondary float-right">Logout</button>
 				</form>
 			</div>
 			<div id="contentDiv" style="clear: right;">
+				<div th:if="${message}" th:text="${message}" class="alert alert-dark"></div>
+				<div th:if="${error}" th:text="${error}" class="alert alert-danger"></div>
 				<nav style="clear: right;">
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab" aria-controls="nav-files" aria-selected="true">Files</a>
@@ -33,7 +35,7 @@
 										<label for="fileUpload">Upload a New File:</label>
 									</div>
 									<div class="col-sm-6">
-										<input type="file" class="form-control-file" id="fileUpload" name="file">
+										<input type="file" class="form-control-file" id="fileUpload" name="file" required>
 									</div>
 									<div class="col-sm-4">
 										<button type="submit" class="btn btn-dark">Upload</button>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
@@ -22,8 +23,13 @@ public class FileController {
 	private FileService fileService;
 
 	@PostMapping
-	public String uploadFile(MultipartFile file, int userId) {
-		fileService.uploadFile(file, userId);
+	public String uploadFile(MultipartFile file, int userId, RedirectAttributes ra) {
+		if (fileService.uploadFile(file, userId) == 1) {
+			ra.addFlashAttribute("message", "Successfully uploaded file");
+		} else {
+			ra.addFlashAttribute("error", "An error occurred while uploading the file");
+		}
+
 		return "redirect:/home";
 	}
 	
@@ -38,8 +44,13 @@ public class FileController {
 	}
 
 	@GetMapping("delete/{id}")
-	public String deleteFile(@PathVariable int id) {
-		fileService.deleteFileById(id);
+	public String deleteFile(@PathVariable int id, RedirectAttributes ra) {
+		if (fileService.deleteFileById(id) == 1) {
+			ra.addFlashAttribute("message", "Successfully deleted file");
+		} else {
+			ra.addFlashAttribute("error", "An error occurred while deleting the file");
+		}
+
 		return "redirect:/home";
 	}
 }

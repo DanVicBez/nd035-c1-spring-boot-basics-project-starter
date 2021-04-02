@@ -42,4 +42,15 @@ public interface FileMapper {
 	@Delete("DELETE FROM FILES "
 			+ "WHERE fileId = #{id}")
 	public int deleteFileById(int id);
+
+	@Select("SELECT * "
+			+ "FROM FILES "
+			+ "WHERE filename = #{name}")
+	@Results({
+		@Result(property = "id", column = "fileId"),
+		@Result(property = "name", column = "filename"),
+		@Result(property = "size", column = "filesize"),
+		@Result(property = "data", column = "filedata")
+	})
+	public File getFileByName(String name);
 }
