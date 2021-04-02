@@ -27,7 +27,7 @@ public class FileController {
 		return "redirect:/home";
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("view/{id}")
 	public ResponseEntity<Resource> viewFile(@PathVariable int id) {
 		File file = fileService.getFileById(id);
 		Resource resource = new ByteArrayResource(file.getData(), file.getName());
@@ -35,5 +35,11 @@ public class FileController {
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
 				.body(resource);
+	}
+
+	@GetMapping("delete/{id}")
+	public String deleteFile(@PathVariable int id) {
+		fileService.deleteFileById(id);
+		return "redirect:/home";
 	}
 }

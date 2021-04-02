@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -18,7 +19,7 @@ public interface FileMapper {
 
 	@Select("SELECT * "
 		  + "FROM FILES "
-		  + "WHERE userId=#{userId}")
+		  + "WHERE userId = #{userId}")
 	@Results({
 		@Result(property = "id", column = "fileId"),
 		@Result(property = "name", column = "filename"),
@@ -29,7 +30,7 @@ public interface FileMapper {
 
 	@Select("SELECT * "
 			+ "FROM FILES "
-			+ "WHERE fileId=#{id}")
+			+ "WHERE fileId = #{id}")
 	@Results({
 		@Result(property = "id", column = "fileId"),
 		@Result(property = "name", column = "filename"),
@@ -37,4 +38,8 @@ public interface FileMapper {
 		@Result(property = "data", column = "filedata")
 	})
 	public File getFileById(int id);
+
+	@Delete("DELETE FROM FILES "
+			+ "WHERE fileId = #{id}")
+	public int deleteFileById(int id);
 }

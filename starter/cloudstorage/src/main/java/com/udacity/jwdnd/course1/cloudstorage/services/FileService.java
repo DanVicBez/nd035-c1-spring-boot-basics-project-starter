@@ -40,4 +40,8 @@ public class FileService {
 	public File getFileById(int id) {
 		return fileMapper.getFileById(id);
 	}
+
+	public int deleteFileById(int id) {
+		return fileMapper.deleteFileById(id);
+	}
 }
