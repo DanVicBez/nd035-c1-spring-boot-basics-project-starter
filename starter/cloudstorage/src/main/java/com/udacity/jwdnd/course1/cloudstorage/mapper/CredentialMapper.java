@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -39,4 +40,8 @@ public interface CredentialMapper {
 		@Result(property = "id", column = "credentialid")
 	})
 	public List<Credential> getAllCredentialsForUser(int userId);
+	
+	@Delete("DELETE FROM CREDENTIALS "
+		  + "WHERE credentialid = #{id}")
+	public int deleteById(int id);
 }

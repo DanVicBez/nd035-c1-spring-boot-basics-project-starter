@@ -30,7 +30,7 @@ public class NoteService {
 		return noteMapper.getAllNotesForUser(user.getId());
 	}
 	
-	public int deleteNoteWithId(int id) {
+	public int deleteNoteById(int id) {
 		return noteMapper.deleteById(id);
 	}
 }

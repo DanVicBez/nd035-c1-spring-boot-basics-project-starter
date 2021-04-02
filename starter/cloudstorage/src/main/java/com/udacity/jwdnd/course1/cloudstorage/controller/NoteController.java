@@ -24,7 +24,7 @@ public class NoteController {
 	
 	@GetMapping("delete/{id}")
 	public String deleteNote(@PathVariable int id) {
-		noteService.deleteNoteWithId(id);
+		noteService.deleteNoteById(id);
 		return "redirect:/home";
 	}
 }
