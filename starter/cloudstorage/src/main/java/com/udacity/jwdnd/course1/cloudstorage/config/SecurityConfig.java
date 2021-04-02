@@ -26,10 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/css/**", "/js/**", "/signup", "/login", "/h2-console/**").permitAll()
 				.anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").defaultSuccessUrl("/home", true)
-				.and().logout();
+				.and().csrf().disable();
 
 		// required for H2 console to work
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+//		http.headers().frameOptions().disable();
 	}
 }
