@@ -1,6 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
+import com.udacity.jwdnd.course1.cloudstorage.model.User;
 
 @Service
 public class FileService {
@@ -29,5 +31,13 @@ public class FileService {
 		}
 		
 		return fileMapper.insertFile(file);
+	}
+	
+	public List<File> getAllFilesForUser(User user) {
+		return fileMapper.getAllFilesForUser(user.getId());
+	}
+
+	public File getFileById(int id) {
+		return fileMapper.getFileById(id);
 	}
 }
